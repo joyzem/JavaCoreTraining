@@ -20,8 +20,7 @@ public class ElementaryTraining {
      * @return среднее значение для введенных чисел
      */
     public double averageValue(int firstValue, int secondValue) {
-        //TODO: implement it
-        return 0;
+        return (double) (firstValue + secondValue) / 2;
     }
 
     /**
@@ -34,8 +33,7 @@ public class ElementaryTraining {
      * @return сумма новых трех чисел
      */
     public double complicatedAmount(int firstValue, int secondValue, int thirdValue) {
-        //TODO: implement it
-        return 0;
+        return firstValue * 2 + secondValue - 3 + thirdValue * thirdValue;
     }
 
     /**
@@ -47,8 +45,11 @@ public class ElementaryTraining {
      * @return новое значение
      */
     public int changeValue(int value) {
-        //TODO: implement it
-        return value;
+        if (value > 3) {
+            return value + 10;
+        } else {
+            return value - 10;
+        }
     }
 
     /**
@@ -62,8 +63,26 @@ public class ElementaryTraining {
      * @return новое число
      */
     public int swapNumbers(int value) {
-        //TODO: implement it
-        return 0;
+        int valueLength = 0;
+        int valueCopy = value;
+        while (valueCopy > 0) {
+            valueLength++;
+            valueCopy /= 10;
+        }
+        if (valueLength > 5 || valueLength < 2) {
+            return value;
+        }
+        int result = 0;
+        result += (value % 10) * Math.pow(10, valueLength - 1); // First digit * 10^(valueLength - 1)
+        value /= 10;
+        int decimal = 1;
+        while (decimal < valueLength - 1) {
+            result += (value % 10) * Math.pow(10, decimal);
+            value /= 10;
+            decimal++;
+        }
+        result += value % 10;
+        return result;
     }
 
     /**
@@ -77,7 +96,19 @@ public class ElementaryTraining {
      * @return новое число
      */
     public int zeroEvenNumber(int value) {
-        //TODO: implement it
-        return 0;
+        if (value < 10) {
+            return value;
+        }
+        int newValue = 0;
+        int decimalCounter = 0;
+        while (value != 0) {
+            int digit = value % 10;
+            if (digit % 2 == 1) {
+                newValue += digit * Math.pow(10, decimalCounter);
+            }
+            decimalCounter++;
+            value /= 10;
+        }
+        return newValue;
     }
 }

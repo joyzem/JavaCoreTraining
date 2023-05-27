@@ -1,5 +1,10 @@
 package com.example.user.javacoretraining.training;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Набор тренингов по работе со строками в java.
  * <p>
@@ -22,8 +27,11 @@ public class StringsTraining {
      * элементов строки text
      */
     public String getOddCharacterString(String text) {
-        //TODO: implement it
-        return "";
+        StringBuilder newString = new StringBuilder();
+        for (int i = 1; i < text.length(); i += 2) {
+            newString.append(text.charAt(i));
+        }
+        return newString.toString();
     }
 
     /**
@@ -37,8 +45,21 @@ public class StringsTraining {
      * вернуть пустой массив
      */
     public int[] getArrayLastSymbol(String text) {
-        //TODO: implement it
-        return new int[]{};
+        if (text.length() == 0) {
+            return new int[]{};
+        }
+        char lastSymbol = text.charAt(text.length() - 1);
+        List<Integer> tmpArray = new ArrayList<>();
+        for (int i = 0; i < text.length() - 1; i++) {
+            if (text.charAt(i) == lastSymbol) {
+                tmpArray.add(i);
+            }
+        }
+        int[] lastSymbolArray = new int[tmpArray.size()];
+        for (int i = 0; i < tmpArray.size(); i++) {
+            lastSymbolArray[i] = tmpArray.get(i);
+        }
+        return lastSymbolArray;
     }
 
     /**
@@ -49,8 +70,14 @@ public class StringsTraining {
      * @return количество цифр в строке
      */
     public int getNumbersCount(String text) {
-        //TODO: implement it
-        return 0;
+        int counter = 0;
+        for (int i = 0; i < text.length(); i++) {
+            int charCode = (int) text.charAt(i);
+            if (charCode >= 48 && charCode <= 57) {
+                counter++;
+            }
+        }
+        return counter;
     }
 
     /**
@@ -61,7 +88,12 @@ public class StringsTraining {
      * @return текст, где цифры заменены словами
      */
     public String replaceAllNumbers(String text) {
-        //TODO: implement it
+        List<String> dictionary = Arrays.asList(
+                "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"
+        );
+        for (int i = 0; i < dictionary.size(); i++) {
+            text = text.replace(String.valueOf(i), dictionary.get(i));
+        }
         return text;
     }
 
@@ -73,8 +105,18 @@ public class StringsTraining {
      * @return измененная строка
      */
     public String capitalReverse(String text) {
-        //TODO: implement it
-        return text;
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < text.length(); i++) {
+            int charCode = (int) text.charAt(i);
+            boolean isUpperCase = charCode >= 65 && charCode <= 90      // Latin
+                    || charCode >= 1040 && charCode <= 1071;            // Cyrillic
+            if (isUpperCase) {
+                result.append(String.valueOf(text.charAt(i)).toLowerCase());
+            } else {
+                result.append(String.valueOf(text.charAt(i)).toUpperCase());
+            }
+        }
+        return result.toString();
     }
 
 }
